@@ -17,6 +17,7 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: "Password is required"
   },
+})
   
  
 
@@ -48,7 +49,6 @@ UserSchema.methods = {
     if (!password) return ''
     try {
       return crypto
-        .createHmac('sha1', this.salt)
         .update(password)
         .digest('hex')
     } catch (err) {
@@ -57,5 +57,6 @@ UserSchema.methods = {
   },
 
 }
+
 
 export default mongoose.model('User', UserSchema)
