@@ -53,79 +53,11 @@ const create = (params, credentials, post) => {
       console.log(err)
     })
   }
-  
-  const like = (params, credentials, postId) => {
-    return fetch('/api/posts/like/', {
-      method: 'PUT',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + credentials.t
-      },
-      body: JSON.stringify({userId:params.userId, postId: postId})
-    }).then((response) => {
-      return response.json()
-    }).catch((err) => {
-      console.log(err)
-    })
-  }
-  
-  const unlike = (params, credentials, postId) => {
-    return fetch('/api/posts/unlike/', {
-      method: 'PUT',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + credentials.t
-      },
-      body: JSON.stringify({userId:params.userId, postId: postId})
-    }).then((response) => {
-      return response.json()
-    }).catch((err) => {
-      console.log(err)
-    })
-  }
-  
-  const comment = (params, credentials, postId, comment) => {
-    return fetch('/api/posts/comment/', {
-      method: 'PUT',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + credentials.t
-      },
-      body: JSON.stringify({userId:params.userId, postId: postId, comment: comment})
-    }).then((response) => {
-      return response.json()
-    }).catch((err) => {
-      console.log(err)
-    })
-  }
-  
-  const uncomment = (params, credentials, postId, comment) => {
-    return fetch('/api/posts/uncomment/', {
-      method: 'PUT',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + credentials.t
-      },
-      body: JSON.stringify({userId:params.userId, postId: postId, comment: comment})
-    }).then((response) => {
-      return response.json()
-    }).catch((err) => {
-      console.log(err)
-    })
-  }
-  
+
   export {
     listNewsFeed,
     listByUser,
     create,
-    remove,
-    like,
-    unlike,
-    comment,
-    uncomment
+    remove
   }
   
