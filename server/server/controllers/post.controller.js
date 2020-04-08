@@ -92,6 +92,61 @@ const photo = (req, res, next) => {
     return res.send(req.post.photo.data)
 }
 
+const like = (req, res) => {
+  Post.findByIdAndUpdate(req.body.postId, {$push: {likes: req.body.userId}}, {new: true})
+  .exec((err, result) => {
+    if (err) {
+      return res.status(400).json({
+        error: errorHandler.getErrorMessage(err)
+      })
+    }
+    res.json(result)
+  })
+}
+
+const unlike = (req, res) => {
+  Post.findByIdAndUpdate(req.body.postId, {$pull: {likes: req.body.userId}}, {new: true})
+  .exec((err, result) => {
+    if (err) {
+      return res.status(400).json({
+        error: errorHandler.getErrorMessage(err)
+      })
+    }
+    res.json(result)
+  })
+}
+
+
+const comment = (req, res) => {
+  let comment = req.body.comment
+  comment.postedBy = req.body.userId
+  Post.findByIdAndUpdate(req.body.postId, {$push: {comments: comment}}, {new: true})
+  .populate('comments.postedBy', '_id name')
+  .populate('postedBy', '_id name')
+  .exec((err, result) => {
+    if (err) {
+      return res.status(400).json({
+        error: errorHandler.getErrorMessage(err)
+      })
+    }
+    res.json(result)
+  })
+}
+const uncomment = (req, res) => {
+  let comment = req.body.comment
+  Post.findByIdAndUpdate(req.body.postId, {$pull: {comments: {_id: comment._id}}}, {new: true})
+  .populate('comments.postedBy', '_id name')
+  .populate('postedBy', '_id name')
+  .exec((err, result) => {
+    if (err) {
+      return res.status(400).json({
+        error: errorHandler.getErrorMessage(err)
+      })
+    }
+    res.json(result)
+  })
+}
+
 const isPoster = (req, res, next) => {
   let isPoster = req.post && req.auth && req.post.postedBy._id == req.auth._id
   if(!isPoster){
@@ -109,5 +164,9 @@ export default {
   postByID,
   remove,
   photo,
+  like,
+  unlike,
+  comment,
+  uncomment,
   isPoster
 }

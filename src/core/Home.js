@@ -3,7 +3,12 @@ import PropTypes from 'prop-types'
 import {withStyles} from 'material-ui/styles'
 import Card, {CardContent, CardMedia} from 'material-ui/Card'
 import Typography from 'material-ui/Typography'
+import safespaceImg from './../assets/images/safespace.jpg'
+import {Link} from 'react-router-dom'
 import Grid from 'material-ui/Grid'
+import auth from './../auth/auth-helper'
+import FindPeople from './../user/FindPeople'
+import Newsfeed from './../post/Newsfeed'
 
 const styles = theme => ({
   root: {
@@ -17,7 +22,7 @@ const styles = theme => ({
   },
   title: {
     padding:`${theme.spacing.unit * 3}px ${theme.spacing.unit * 2.5}px ${theme.spacing.unit * 2}px`,
-    color: theme.palette.text.secondary
+    color: theme.palette.text.primary
   },
   media: {
     minHeight: 330
@@ -28,7 +33,13 @@ class Home extends Component {
   state = {
     defaultPage: true
   }
-  
+  init = () => {
+    if(auth.isAuthenticated()){
+      this.setState({defaultPage: false})
+    }else{
+      this.setState({defaultPage: true})
+    }
+  }
   componentWillReceiveProps = () => {
     this.init()
   }
@@ -46,17 +57,26 @@ class Home extends Component {
                 <Typography type="headline" component="h2" className={classes.title}>
                   Home Page
                 </Typography>
-                
+                <CardMedia className={classes.media} image={safespaceImg} title="SafeSpace"/>
                 <CardContent>
                   <Typography type="body1" component="p">
-                    Welcome to SafeSpace. 
+                    Welcome to the SafeSpace!
                   </Typography>
                 </CardContent>
               </Card>
             </Grid>
           </Grid>
         }
-        
+        {!this.state.defaultPage &&
+          <Grid container spacing={24}>
+            <Grid item xs={8} sm={7}>
+              <Newsfeed/>
+            </Grid>
+            <Grid item xs={6} sm={5}>
+              <FindPeople/>
+            </Grid>
+          </Grid>
+        }
       </div>
     )
   }

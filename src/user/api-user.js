@@ -61,10 +61,6 @@ const remove = (params, credentials) => {
   }).catch((err) => console.log(err))
 }
 
-
-
-
-
 export {
   create,
   list,
