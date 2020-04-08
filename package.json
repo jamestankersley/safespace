@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "A MERN stack based social media application",
   "author": "Christian & James",
-  "license": "",
+  "license": "MIT",
   "keywords": [
     ""
   ],
@@ -15,7 +15,6 @@
   "main": "./dist/server.generated.js",
   "scripts": {
     "development": "nodemon",
-    "build": "webpack --config webpack.config.client.production.js && webpack --mode=production --config webpack.config.server.js",
     "start": "nodemon"
   },
   "engines": {
@@ -28,6 +27,7 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
+    "file-loader": "^1.1.11",
     "nodemon": "^1.17.3",
     "webpack": "^4.6.0",
     "webpack-cli": "^2.0.15",
@@ -36,9 +36,11 @@
     "webpack-node-externals": "^1.7.2"
   },
   "dependencies": {
+    "babel": "^6.23.0",
     "body-parser": "^1.18.2",
     "compression": "^1.7.2",
     "cookie-parser": "^1.4.3",
+    "core-util-is": "^1.0.2",
     "cors": "^2.8.4",
     "express": "^4.16.3",
     "express-jwt": "^5.3.1",
@@ -49,7 +51,7 @@
     "material-ui": "^1.0.0-beta.43",
     "material-ui-icons": "^1.0.0-beta.36",
     "mongoose": "^5.0.16",
-    "react": "^16.3.2",
+    "react": "^16.13.1",
     "react-dom": "^16.3.2",
     "react-hot-loader": "^4.1.2",
     "react-router": "^4.2.0",

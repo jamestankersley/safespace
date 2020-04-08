@@ -10,12 +10,12 @@ import Typography from 'material-ui/Typography'
 import Edit from 'material-ui-icons/Edit'
 import Divider from 'material-ui/Divider'
 import DeleteUser from './DeleteUser'
-import auth from '../auth/auth-helper'
+import auth from './../auth/auth-helper'
 import {read} from './api-user.js'
 import {Redirect, Link} from 'react-router-dom'
-import FollowProfileButton from './FollowProfileButton'
-import ProfileTabs from './ProfileTabs'
-import {listByUser} from '../post/api-post.js'
+import FollowProfileButton from './../user/FollowProfileButton'
+import ProfileTabs from './../user/ProfileTabs'
+import {listByUser} from './../post/api-post.js'
 
 const styles = theme => ({
   root: theme.mixins.gutters({
@@ -67,27 +67,6 @@ class Profile extends Component {
   componentDidMount = () => {
     this.init(this.match.params.userId)
   }
-  checkFollow = (user) => {
-    const jwt = auth.isAuthenticated()
-    const match = user.followers.find((follower)=> {
-      return follower._id == jwt.user._id
-    })
-    return match
-  }
-  clickFollowButton = (callApi) => {
-    const jwt = auth.isAuthenticated()
-    callApi({
-      userId: jwt.user._id
-    }, {
-      t: jwt.token
-    }, this.state.user._id).then((data) => {
-      if (data.error) {
-        this.setState({error: data.error})
-      } else {
-        this.setState({user: data, following: !this.state.following})
-      }
-    })
-  }
   loadPosts = (user) => {
     const jwt = auth.isAuthenticated()
     listByUser({
@@ -101,12 +80,6 @@ class Profile extends Component {
         this.setState({posts: data})
       }
     })
-  }
-  removePost = (post) => {
-    const updatedPosts = this.state.posts
-    const index = updatedPosts.indexOf(post)
-    updatedPosts.splice(index, 1)
-    this.setState({posts: updatedPosts})
   }
   render() {
     const {classes} = this.props

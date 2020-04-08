@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-
 import auth from './../auth/auth-helper'
 import Card, { CardHeader, CardContent, CardActions } from 'material-ui/Card'
 import Typography from 'material-ui/Typography'
