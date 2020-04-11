@@ -2,11 +2,15 @@ import React, {Component} from 'react'
 import Card, { CardHeader, CardContent, CardActions } from 'material-ui/Card'
 import Button from 'material-ui/Button'
 import TextField from 'material-ui/TextField'
+import Typography from 'material-ui/Typography'
 import Avatar from 'material-ui/Avatar'
+import Icon from 'material-ui/Icon'
 import PropTypes from 'prop-types'
 import {withStyles} from 'material-ui/styles'
 import {create} from './api-post.js'
 import auth from './../auth/auth-helper'
+import IconButton from 'material-ui/IconButton'
+import PhotoCamera from 'material-ui-icons/PhotoCamera'
 
 const styles = theme => ({
   root: {
@@ -104,6 +108,17 @@ class NewPost extends Component {
             className={classes.textField}
             margin="normal"
         />
+        <input accept="image/*" onChange={this.handleChange('photo')} className={classes.input} id="icon-button-file" type="file" />
+        <label htmlFor="icon-button-file">
+          <IconButton color="secondary" className={classes.photoButton} component="span">
+            <PhotoCamera />
+          </IconButton>
+        </label> <span className={classes.filename}>{this.state.photo ? this.state.photo.name : ''}</span>
+        { this.state.error && (<Typography component="p" color="error">
+            <Icon color="error" className={classes.error}>error</Icon>
+              {this.state.error}
+            </Typography>)
+        }
       </CardContent>
       <CardActions>
         <Button color="primary" variant="raised" disabled={this.state.text === ''} onClick={this.clickPost} className={classes.submit}>POST</Button>

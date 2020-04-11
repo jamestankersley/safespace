@@ -67,6 +67,27 @@ class Profile extends Component {
   componentDidMount = () => {
     this.init(this.match.params.userId)
   }
+  checkFollow = (user) => {
+    const jwt = auth.isAuthenticated()
+    const match = user.followers.find((follower)=> {
+      return follower._id == jwt.user._id
+    })
+    return match
+  }
+  clickFollowButton = (callApi) => {
+    const jwt = auth.isAuthenticated()
+    callApi({
+      userId: jwt.user._id
+    }, {
+      t: jwt.token
+    }, this.state.user._id).then((data) => {
+      if (data.error) {
+        this.setState({error: data.error})
+      } else {
+        this.setState({user: data, following: !this.state.following})
+      }
+    })
+  }
   loadPosts = (user) => {
     const jwt = auth.isAuthenticated()
     listByUser({
@@ -80,6 +101,12 @@ class Profile extends Component {
         this.setState({posts: data})
       }
     })
+  }
+  removePost = (post) => {
+    const updatedPosts = this.state.posts
+    const index = updatedPosts.indexOf(post)
+    updatedPosts.splice(index, 1)
+    this.setState({posts: updatedPosts})
   }
   render() {
     const {classes} = this.props
