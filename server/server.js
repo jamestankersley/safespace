@@ -3,12 +3,13 @@ import app from './express'
 import mongoose from 'mongoose'
 
 // Connection URL
+
 mongoose.Promise = global.Promise
 mongoose.connect(config.mongoUri)
 mongoose.connection.on('error', () => {
   throw new Error(`unable to connect to database: ${mongoUri}`)
 })
-
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 app.listen(config.port, (err) => {
   if (err) {
     console.log(err)
