@@ -4,7 +4,6 @@ import {withStyles} from 'material-ui/styles'
 import Card, {CardContent, CardMedia} from 'material-ui/Card'
 import Typography from 'material-ui/Typography'
 import safespaceImg from './../assets/images/safespace.jpg'
-import {Link} from 'react-router-dom'
 import Grid from 'material-ui/Grid'
 import auth from './../auth/auth-helper'
 import FindPeople from './../user/FindPeople'
@@ -57,15 +56,19 @@ class Home extends Component {
                 <Typography type="headline" component="h2" className={classes.title}>
                   Home Page
                 </Typography>
-                <CardMedia className={classes.media} image={safespaceImg} title="SafeSpace"/>
+                <CardMedia className={classes.media} image={safespaceImg} title="SafeSpace" />
                 <CardContent>
                   <Typography type="body1" component="p">
                     Welcome to the SafeSpace!
+
+                    This is a social media application that only shows posts in the last 24 hours,
+                    preventing your posts from facing future scrutiny.
                   </Typography>
                 </CardContent>
               </Card>
             </Grid>
           </Grid>
+          
         }
         {!this.state.defaultPage &&
           <Grid container spacing={24}>

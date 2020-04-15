@@ -44,7 +44,7 @@ const Menu = withRouter(({history}) => (
           </Link>
           <Button color="inherit" onClick={() => {
               auth.signout(() => history.push('/'))
-            }}>Sign out</Button>
+            }}>Log out</Button>
         </span>)
       }
     </Toolbar>
