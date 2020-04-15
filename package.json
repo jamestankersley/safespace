@@ -15,7 +15,7 @@
   "main": "./dist/server.generated.js",
   "scripts": {
     "development": "nodemon",
-    "build": "webpack --config webpack.config.client.production.js",
+    "build": "webpack --config webpack.config.client.production.js && webpack --mode=production",
     "start": "nodemon"
   },
   "engines": {
