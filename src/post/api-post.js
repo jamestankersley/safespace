@@ -35,7 +35,7 @@ const listNewsFeed = (params, credentials) => {
       'Authorization': 'Bearer ' + credentials.t
     }
   }).then(response => {
-    return response.json(db.getCollection("Post").find({"created":{$gt:new Date(Date.now() - 24*60*60 * 1000)}}))
+    return response.json(db.getCollection("Post").find({"created":{$gt:new Date(Date.now() - 24*60*60)}}))
   }).catch((err) => console.log(err))
 }
 
