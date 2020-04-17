@@ -8,7 +8,7 @@ const config = {
     (process.env.MONGO_PORT || '27017') +
     '/safespace'
 }
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/Headlines";
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 mongoose.connect(MONGODB_URI);
 
 export default config
